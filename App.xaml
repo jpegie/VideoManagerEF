@@ -1,0 +1,9 @@
+﻿<Application x:Class="VideosManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:VideosManager"
+             StartupUri="Views/VideosManagerWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
