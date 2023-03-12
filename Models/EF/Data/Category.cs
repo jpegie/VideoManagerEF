@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace VideosManager.Models.EF.Data;
 
 [Table("CATEGORIES")]
-[PrimaryKey(nameof(Id))]
+[PrimaryKey(nameof(ID))]
 public class Category
 {
     [Column("ID")]
-    public string Id { get; set; } = null!;
+    public string ID { get; set; } = null!;
 
     [Column("NAME")]
     public string Name { get; set; } = null!;

@@ -19,6 +19,60 @@ class MainModel
 
     public VideosManagerContext Context => _context;
 
+    public void RemoveClip(Clip clip)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddClip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveCategory(Category cat)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddCategory()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveChannel(Channel ch)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddChannel()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveFinalVideo(FinalVideo vid)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddFinalVideo()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveFinalVideoClip(FinalVideoClip clip)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddFinalVideoClip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SaveClips()
+    {
+        throw new NotImplementedException();
+    }
     private void InitContext()
     {
         _context = new VideosManagerContext();

@@ -5,9 +5,195 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideosManager.Views"
         Title="VideosManager" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="CellStyle" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="5"/>
+        </Style>
+
+        <DataTemplate x:Key="CellTemplateRemoveClip">
+            <Button Content="Remove"
+                    DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"
+                    Command="{Binding RemoveClipCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=ClipsGrid}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CellTemplateRemoveCategory">
+            <Button Content="Remove"
+                    DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"
+                    Command="{Binding RemoveCategoryCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=CategoriesGrid}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CellTemplateRemoveChannel">
+            <Button Content="Remove"
+                    Command="{Binding RemoveChannelCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=ChannelsGrid}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CellTemplateRemoveFinalVideoClip">
+            <Button Content="Remove"
+                    Command="{Binding RemoveFinalVideoClipCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=FinalVideoClipsGrid}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CellTemplateRemoveFinalVideo">
+            <Button Content="Remove"
+                    Command="{Binding RemoveFinalVideoCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=FinalVideosGrid}"/>
+        </DataTemplate>
+
+    </Window.Resources>
+
     <Grid>
-        <ListBox x:Name="ListView_Clips" ItemsSource="{Binding Clips}" DisplayMemberPath="Name">
-            
-        </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl Grid.Column="1" Grid.Row="1">
+            <TabItem Header="Clips">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid x:Name="ClipsGrid" 
+                              CellStyle="{StaticResource CellStyle}" 
+                              AutoGenerateColumns="False" 
+                              HorizontalScrollBarVisibility="Disabled" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              ItemsSource="{Binding Clips}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" MinWidth="100"
+                                                Binding="{Binding ID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Name" MinWidth="100"
+                                                Binding="{Binding Name}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Link" MinWidth="100" 
+                                                Binding="{Binding Link}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Channel ID" MinWidth="100" 
+                                                Binding="{Binding ChannelID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Views" MinWidth="80" 
+                                                Binding="{Binding Views}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Duration" MinWidth="100" 
+                                                Binding="{Binding Duration}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Publication Date" MinWidth="100"
+                                                Binding="{Binding PubDate}"/>
+                            <DataGridTemplateColumn IsReadOnly="False" Header="" MinWidth="100" 
+                                                    CellTemplate="{StaticResource CellTemplateRemoveClip}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Content="Add Clip" 
+                            HorizontalAlignment="Left" 
+                            Margin="120,0,0,0" 
+                            Grid.Row="1" 
+                            VerticalAlignment="Center" 
+                            Height="30" 
+                            Width="100" 
+                            Command="{Binding AddClipCommand}"/>
+                    <Button Content="Save Clips" 
+                            HorizontalAlignment="Left" 
+                            Margin="10,0,0,0" 
+                            Grid.Row="1" 
+                            VerticalAlignment="Center" 
+                            Height="30" 
+                            Width="100" 
+                            Command="{Binding SaveClipsCommand}"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Categories">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="CategoriesGrid" 
+                              CellStyle="{StaticResource CellStyle}"
+                              HorizontalScrollBarVisibility="Disabled" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Categories}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" MinWidth="100" 
+                                                Binding="{Binding ID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Name" MinWidth="100" 
+                                                Binding="{Binding Name}"/>
+                            <DataGridTemplateColumn IsReadOnly="False" Header="" MinWidth="100" 
+                                                    CellTemplate="{StaticResource CellTemplateRemoveCategory}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Channels">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="ChannelsGrid" 
+                              CellStyle="{StaticResource CellStyle}"
+                              AutoGenerateColumns="False" 
+                              HorizontalScrollBarVisibility="Disabled" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              ItemsSource="{Binding Channels}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" MinWidth="100" 
+                                                Binding="{Binding ID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Name" MinWidth="100" 
+                                                Binding="{Binding Name}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Link" MinWidth="100" 
+                                                Binding="{Binding Link}"/>
+                            <DataGridTemplateColumn IsReadOnly="False" Header="" MinWidth="100" 
+                                                    CellTemplate="{StaticResource CellTemplateRemoveChannel}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Final Video Clips">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="FinalVideoClipsGrid" 
+                              CellStyle="{StaticResource CellStyle}"
+                              HorizontalScrollBarVisibility="Disabled" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding FinalVideoClips}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Clip ID" MinWidth="100" 
+                                                Binding="{Binding ClipID}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Video ID" MinWidth="100" 
+                                                Binding="{Binding VideoID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Order In Video" MinWidth="100" 
+                                                Binding="{Binding OrderInVideo}"/>
+                            <DataGridTemplateColumn IsReadOnly="False" Header="" MinWidth="100" 
+                                                    CellTemplate="{StaticResource CellTemplateRemoveFinalVideoClip}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Final Videos">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="FinalVideosGrid" 
+                              CellStyle="{StaticResource CellStyle}"
+                              HorizontalScrollBarVisibility="Disabled" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding FinalVideos}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" MinWidth="100" 
+                                                Binding="{Binding ID}"/>
+                            <DataGridTextColumn IsReadOnly="False" Header="Name" MinWidth="100" 
+                                                Binding="{Binding Name}"/>
+                            <DataGridTemplateColumn IsReadOnly="False" Header="" MinWidth="100" 
+                                                    CellTemplate="{StaticResource CellTemplateRemoveFinalVideo}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
