@@ -9,6 +9,7 @@ namespace VideosManager.Models.EF.Data;
 [PrimaryKey(nameof(ID))]
 public class Clip
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("ID")]
     public string ID { get; set; } = null!;
     [Column("NAME")]

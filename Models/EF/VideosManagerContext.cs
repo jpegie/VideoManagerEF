@@ -8,8 +8,8 @@ public class VideosManagerContext : DbContext
     public DbSet<Channel> Channels { get; set; }
     public DbSet<Clip> Clips { get; set; }
     public DbSet<FinalVideo> FinalVideos { get; set; }
-    public DbSet <FinalVideoClip> FinalVideoClips { get; set; }
-    public DbSet <ClipWithCat> ClipsWithCat { get; set; }
+    public DbSet<FinalVideoClip> FinalVideoClips { get; set; }
+    public DbSet<ClipWithCat> ClipsWithCat { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

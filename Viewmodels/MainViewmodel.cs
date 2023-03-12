@@ -11,9 +11,10 @@ using VideosManager.Models.EF;
 using VideosManager.Models;
 using System.Windows.Input;
 using DbUtil;
+using System.ComponentModel;
 
 namespace VideosManager.Viewmodels;
-class MainViewmodel
+class MainViewmodel : INotifyPropertyChanged
 {
     MainModel _model;
     public MainViewmodel(MainModel model)
@@ -33,13 +34,31 @@ class MainViewmodel
         FinalVideoClips = context.FinalVideoClips.Local.ToObservableCollection();
     }
 
+    public string NewClipID
+    {
+        get => _model.NewClipID;
+        set
+        {
+            _model.NewClipID = value;
+            OnPropertyChanged(nameof(NewClipID));
+        }
+    }
+
     public ObservableCollection<Clip> Clips { get; set; } = null!;
     public ObservableCollection<Category> Categories { get; set; } = null!;
     public ObservableCollection<Channel> Channels { get; set; } = null!;
     public ObservableCollection<ClipWithCat> ClipsWithCat { get; set; } = null!;
     public ObservableCollection<FinalVideo> FinalVideos { get; set; } = null!;
     public ObservableCollection<FinalVideoClip> FinalVideoClips { get; set; } = null!;
-    
+
+    public ICommand SaveChangesCommand
+    {
+        get
+        {
+            return new RelayCommand(param => _model.SaveChanges());
+        }
+    }
+
     public ICommand RemoveClipCommand
     {
         get
@@ -53,14 +72,6 @@ class MainViewmodel
         get
         {
             return new RelayCommand(param => _model.AddClip());
-        }
-    }
-
-    public ICommand SaveClipsCommand
-    {
-        get
-        {
-            return new RelayCommand(param => _model.SaveClips());
         }
     }
 
@@ -80,4 +91,15 @@ class MainViewmodel
         }
     }
 
+
+    #region INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+    public void OnPropertyChanged(string prop = "")
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+    #endregion
 }

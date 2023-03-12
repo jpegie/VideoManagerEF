@@ -15,6 +15,7 @@ public partial class VideosManagerWindow : Window
 
         _model = new MainModel();
         _viewmodel = new MainViewmodel(_model);
+        _model.Viewmodel = _viewmodel;
         DataContext = _viewmodel;
     }
 }
