@@ -24,6 +24,17 @@ class MainViewmodel : INotifyPropertyChanged
         InitCollections();
     }
 
+    public void InitCollections()
+    {
+        var context = _model.Context;
+        Clips = context.Clips.Local.ToObservableCollection();
+        Categories = context.Categories.Local.ToObservableCollection();
+        Channels = context.Channels.Local.ToObservableCollection();
+        ClipsWithCats = context.ClipsWithCat.Local.ToObservableCollection();
+        FinalVideos = context.FinalVideos.Local.ToObservableCollection();
+        FinalVideoClips = context.FinalVideoClips.Local.ToObservableCollection();
+    }
+
     public ObservableCollection<Clip> Clips
     {
         get => _clips;  
@@ -222,17 +233,6 @@ class MainViewmodel : INotifyPropertyChanged
     private void ModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         OnPropertyChanged(e.PropertyName!); //свойства модели и вьюмодели имеют эквивалентные названия
-    }
-
-    public void InitCollections()
-    {
-        var context = _model.Context;
-        Clips = context.Clips.Local.ToObservableCollection();
-        Categories = context.Categories.Local.ToObservableCollection();
-        Channels = context.Channels.Local.ToObservableCollection();
-        ClipsWithCats = context.ClipsWithCat.Local.ToObservableCollection();
-        FinalVideos = context.FinalVideos.Local.ToObservableCollection();
-        FinalVideoClips = context.FinalVideoClips.Local.ToObservableCollection();
     }
 
     #region INotifyPropertyChanged
