@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VideosManager.Models.EF.Data;
 
-[Table("Channels")]
+[Table("CHANNELS")]
 [PrimaryKey(nameof(ID))]
 public class Channel 
 {

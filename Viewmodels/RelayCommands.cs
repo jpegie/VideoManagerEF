@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace DbUtil
+namespace RelayCommands
 {
     public class RelayCommand : ICommand
     {
@@ -36,7 +36,6 @@ namespace DbUtil
         }
 
         #endregion // Constructors
-
         #region ICommand Members
 
         public bool CanExecute(object parameters)

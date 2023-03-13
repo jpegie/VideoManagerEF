@@ -13,6 +13,6 @@ public class VideosManagerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=VladimirPC\SERVER00;Database=VIDEO_MANAGER1;Trusted_Connection=True;TrustServerCertificate=true;");
+        optionsBuilder.UseSqlServer(@"Server=VladimirPC\SERVER00;Database=VIDEO_MANAGER;Trusted_Connection=True;TrustServerCertificate=true;");
     }
 }
