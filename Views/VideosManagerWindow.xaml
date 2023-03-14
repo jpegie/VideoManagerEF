@@ -7,7 +7,8 @@
         Title="VideosManager" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="CellStyle" TargetType="DataGridCell">
-            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Height" Value="30"/>
         </Style>
 
         <DataTemplate x:Key="CellTemplateRemoveClip">
@@ -94,7 +95,7 @@
                               CanUserDeleteRows="False"
                               ItemsSource="{Binding Clips, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="False" Header="ID" MinWidth="100"
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" MinWidth="100"
                                                 Binding="{Binding ID}"/>
                             <DataGridTextColumn IsReadOnly="False" Header="Name" MinWidth="100"
                                                 Binding="{Binding Name}"/>
